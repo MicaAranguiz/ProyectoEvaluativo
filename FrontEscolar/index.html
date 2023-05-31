@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <title>tienGucci</title>
+    <link rel="stylesheet" href="index.css"
 </head>
+
 <body>
+   
+
+    <img src="/FrontEscolar//media/programadores.jpeg">
+
+    <img src="/FrontEscolar//media/programadores.jpeg">
+
+    <img src="/FrontEscolar//media/programadores.jpeg">
     
+
+
+
+    <div class="container" id="tablita">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Grado</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-estudiantess">
+            </tbody>
+        </table>
+    </div>
+
+
+    
+    <div class="container" id="tablita">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-profesoress">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $.get("http://localhost:3000/profesores", (resp) => {
+                const { success, data } = resp;
+                if (success) {
+                    data.forEach(profesores => {
+                        $("#tabla-profesoress").append(
+                            "<tr>" +
+                            "<td>" + profesores.id + "</td>" +
+                            "<td>" + profesores.nombre + "</td>" +
+                            "<td>" + profesores.especialidad + "</td>" +
+                            "<td>" + profesores.email + "</td>" +
+                            "</tr>"
+                        )
+                    })
+                }
+            })
+        })
+    </script>
+ 
+
+
+    <script>
+        $(document).ready(function () {
+            $.get("http://localhost:3000/estudiantes", (resp) => {
+                const { success, data } = resp;
+                if (success) {
+                    data.forEach(estudiantes => {
+                        $("#tabla-estudiantess").append(
+                            "<tr>" +
+                            "<td>" + estudiantes.id + "</td>" +
+                            "<td>" + estudiantes.nombre + "</td>" +
+                            "<td>" + estudiantes.edad + "</td>" +
+                            "<td>" + estudiantes.grado + "</td>" +
+                            "</tr>"
+                        )
+                    })
+                }
+            })
+        })
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

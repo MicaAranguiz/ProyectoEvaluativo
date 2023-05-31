@@ -1,0 +1,19 @@
+#tablita{
+    margin-top:20px;
+}
+th{
+    color:white !important;
+    text-align: center;
+}
+tbody{
+  color:white !important;
+  text-align: center;
+}
+body{
+    background-color: black;
+}
+img{
+    width:620px;
+    height: 670px;
+    margin-left:10px;   
+}

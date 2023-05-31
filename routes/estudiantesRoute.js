@@ -6,6 +6,10 @@ const estudiantesController = require ('./../controllers/estudiantesController')
 // le decimos cual se encarga de resolver el GET
 
 router.get('/', estudiantesController.getEstudiantes);
+router.get('/:id', estudiantesController.getEstudianteById);
+router.post('/', estudiantesController.addEstudiante);
+router.put('/:id', estudiantesController.updateEstudiante)
+router.delete('/:id',estudiantesController.deleteEstudianteById)
 
 module.exports = router;
 
