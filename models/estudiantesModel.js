@@ -14,6 +14,7 @@ exports.getEstudianteById = async (id) => {
     return rows;
 }
 
+
 exports.addEstudiante = async (nuevoestudiante) => {
     const [rows, fields] = await db.execute('INSERT INTO estudiantes (nombre, edad, grado) VALUES (?, ?, ?)', [nuevoestudiante.nombre, nuevoestudiante.edad, nuevoestudiante.grado]);
     return rows;
