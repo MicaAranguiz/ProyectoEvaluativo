@@ -1,4 +1,4 @@
-const estudiantesModel = require('./../models/estudiantesModel') 
+const estudiantesModel = require('./../models/estudiantesModel')
 // traemos todo lo que tiene dentro 
 
 exports.getEstudiantes = async (req, res) => {
@@ -30,7 +30,7 @@ exports.getEstudiantes = async (req, res) => {
 exports.getEstudianteById = async (req, res) => {
     const idEstudiante = req.params.id;
     try {
-        const estudiante= await estudiantesModel.getEstudianteById(idEstudiante)
+        const estudiante = await estudiantesModel.getEstudianteById(idEstudiante)
 
         if (estudiante.length < 1) {
             res.status(404).json({
@@ -41,7 +41,7 @@ exports.getEstudianteById = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-           estudiante
+            estudiante
 
         })
     }
@@ -91,43 +91,43 @@ exports.updateEstudiante = async (req, res) => {
                 success: false,
                 message: "datos no actualizados"
             })
-         }
+        }
         res.status(200).json({
             success: true,
             message: "lista actualizada",
-       estudiante
+            estudiante
         })
-     }
-     catch(error) {
+    }
+    catch (error) {
         res.status(500).json({
             success: false,
             message: "No andaaaaaaaaaaaaa"
         })
-        }
     }
-    exports.deleteEstudianteById = async(req, res)=>{
+}
+exports.deleteEstudianteById = async (req, res) => {
 
-        const idEstudiante = req.params.id;
-        try {
-            const estudiante = await estudiantesModel.deleteEstudianteById(idEstudiante)
-    
-            if(estudiante.length<1){ //pregunto si existe el usuario
-                res.status(404).json({
-                    success:false,
-                    mgs:`No existe usuario con el id: ${idEstudiante}`
-                })
-            }
-            //si todo va bien y existe el usuario =D
-            res.status(200).json({
-                success:true,
-                msg:"El usuario fue eliminado con exito"
-            })
-        } catch (error) {
-    
-            console.error(error);
-            res.status(500).json({
-                success:false,
-                message: 'Hubo un error al eliminar el usuario'
+    const idEstudiante = req.params.id;
+    try {
+        const estudiante = await estudiantesModel.deleteEstudianteById(idEstudiante)
+
+        if (estudiante.length < 1) { //pregunto si existe el usuario
+            res.status(404).json({
+                success: false,
+                mgs: `No existe usuario con el id: ${idEstudiante}`
             })
         }
-    }  
+        //si todo va bien y existe el usuario =D
+        res.status(200).json({
+            success: true,
+            msg: "El usuario fue eliminado con exito"
+        })
+    } catch (error) {
+
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Hubo un error al eliminar el usuario'
+        })
+    }
+}  
