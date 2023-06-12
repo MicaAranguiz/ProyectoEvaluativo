@@ -25,3 +25,8 @@ exports.deleteCursoById = async (id) =>{
     return rows
 } 
 
+
+exports.addEstudianteAUnCurso = async (estudiante) => {
+    const [rows, fields] = await db.execute('INSERT INTO `estudiantes_cursos` VALUE ( ?, ? )', [estudiante.estudiante_id, estudiante.id]);
+    return rows;
+}

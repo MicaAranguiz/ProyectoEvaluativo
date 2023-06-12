@@ -21,9 +21,14 @@ exports.addEstudiante = async (nuevoestudiante) => {
 }
 exports.updateEstudiante = async(estudiante)=>{
     const [rows, fields] = await db.execute('UPDATE estudiantes SET nombre = ?, edad = ?, grado = ? WHERE id = ?', [estudiante.nombre, estudiante.edad, estudiante.grado, estudiante.id]);
-    return rows
+    return rows;
 }
 exports.deleteEstudianteById = async (id) =>{
     const [rows, fields] = await db.execute('DELETE FROM estudiantes WHERE id = ?', [id]);
-    return rows
+    return rows;
 } 
+exports.getCursosDelEstudiante = async (id) => {
+    const [rows, fields] = await db.execute('SELECT cursos.nombre, cursos.descripcion FROM estudiantes_cursos INNER JOIN cursos ON estudiantes_cursos.id_curso = cursos.id INNER JOIN estudiantes ON estudiantes_cursos.id_estudiante = estudiantes.id AND estudiantes.id = ?', [id]);
+    console.log(rows)
+    return rows;
+}
