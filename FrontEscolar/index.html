@@ -10,33 +10,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <title>SISTEMA ESCOLAR</title>
-    <link rel="stylesheet" href="index.css"
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div class="container">
-        <form id="miformulario">
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Edad</label>
-                <input type="text" class="form-control" id="edad">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Grado</label>
-                <input type="text" class="form-control" id="grado" aria-describedby="emailHelp">
 
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="container">
+                    <form id="miformulario" onsubmit="submitRefresh()">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Edad</label>
+                            <input type="text" class="form-control" id="edad">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Grado</label>
+                            <input type="text" class="form-control" id="grado" aria-describedby="emailHelp">
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <script>
+                            function submitRefresh() {
+                                location.reload();
+                            }
+                        </script>
+                    </form>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary" >Enviar</button>
-        </form>
+            <div class="col">
+                <div class="container" id="tablita1">
+                    <h1> TABLA DE ESTUDIANTES</h1>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Grado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-estudiantess">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-
-
     <script>
         $(document).ready(function () {
             $.get("http://localhost:3000/estudiantes", (resp) => {
@@ -56,19 +80,18 @@
             })
         })
     </script>
-
     <script> // para enviar nuevo estudiante
         document.getElementById("miformulario").addEventListener("submit", function (event) {
             event.preventDefault(); //evita el envio del formulario
             var nombre = document.getElementById("nombre").value;
             var edad = document.getElementById("edad").value;
             var grado = document.getElementById("grado").value;
-          
+
 
             var dataestudiante = {
-               nombre: nombre,
-               edad: edad,
-               grado: grado,
+                nombre: nombre,
+                edad: edad,
+                grado: grado,
             }
             console.log(dataestudiante)
             //realizamos la llamada a la api
@@ -94,21 +117,9 @@
     //le decimos que id va a ejecutar y que preste atencion a un evento
     </script>
 
-    <div class="container" id="tablita">
-        <h1> TABLA DE ESTUDIANTES</h1>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Grado</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-estudiantess">
-            </tbody>
-        </table>
-    </div>
+
+
+
 
     <div class="container" id="tablita">
         <h1> TABLA DE PROFESORES</h1>
@@ -127,7 +138,7 @@
     </div>
 
     <div class="container" id="tablita">
-        
+
         <h1> TABLA DE CURSOS</h1>
         <table class="table table-striped table-bordered">
             <thead>
@@ -161,7 +172,7 @@
             })
         })
     </script>
-      <script>
+    <script>
         $(document).ready(function () {
             $.get("http://localhost:3000/cursos", (resp) => {
                 const { success, data } = resp;
@@ -210,4 +221,5 @@
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>
