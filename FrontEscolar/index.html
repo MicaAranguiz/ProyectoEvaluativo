@@ -19,7 +19,7 @@
         <div class="row align-items-start">
             <div class="col">
                 <div class="container">
-                    <form id="miformulario" onsubmit="submitRefresh()">
+                    <form id="miformulario">
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre">
@@ -34,17 +34,13 @@
 
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
-                        <script>
-                            function submitRefresh() {
-                                location.reload();
-                            }
-                        </script>
+
                     </form>
                 </div>
             </div>
             <div class="col">
                 <div class="container" id="tablita1">
-                    <h1> TABLA DE ESTUDIANTES</h1>
+                    <h1> Tabla de Estudiantes</h1>
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -66,13 +62,13 @@
             $.get("http://localhost:3000/estudiantes", (resp) => {
                 const { success, data } = resp;
                 if (success) {
-                    data.forEach(estudiante => {
-                        $("#tabla-estudiantes").append(
+                    data.forEach(estudiantes => {
+                        $("#tabla-estudiantess").append(
                             "<tr>" +
-                            "<td>" + estudiante.id + "</td>" +
-                            "<td>" + estudiante.nombre + "</td>" +
-                            "<td>" + estudiante.edad + "</td>" +
-                            "<td>" + estudiante.grado + "</td>" +
+                            "<td>" + estudiantes.id + "</td>" +
+                            "<td>" + estudiantes.nombre + "</td>" +
+                            "<td>" + estudiantes.edad + "</td>" +
+                            "<td>" + estudiantes.grado + "</td>" +
                             "</tr>"
                         )
                     })
@@ -82,7 +78,7 @@
     </script>
     <script> // para enviar nuevo estudiante
         document.getElementById("miformulario").addEventListener("submit", function (event) {
-            event.preventDefault(); //evita el envio del formulario
+            //  event.preventDefault();  esto evita el envio del formulario
             var nombre = document.getElementById("nombre").value;
             var edad = document.getElementById("edad").value;
             var grado = document.getElementById("grado").value;
@@ -117,42 +113,47 @@
     //le decimos que id va a ejecutar y que preste atencion a un evento
     </script>
 
-
-
-
-
-    <div class="container" id="tablita">
-        <h1> TABLA DE PROFESORES</h1>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Especialidad</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-profesoress">
-            </tbody>
-        </table>
+   <!-- Comienza lo de profesores-->
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="container">
+                    <form id="miformulario2">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreprofe">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Especialidad</label>
+                            <input type="text" class="form-control" id="especialidad">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" aria-describedby="emailHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container" id="tablita2">
+                    <h1> Tabla de Profesores</h1>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Especialidad</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-profesoress">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="container" id="tablita">
-
-        <h1> TABLA DE CURSOS</h1>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                </tr>
-            </thead>
-            <tbody id="tabla-cursoss">
-            </tbody>
-        </table>
-    </div>
-
     <script>
         $(document).ready(function () {
             $.get("http://localhost:3000/profesores", (resp) => {
@@ -172,6 +173,82 @@
             })
         })
     </script>
+    <script> // para enviar nuevo profesor
+        document.getElementById("miformulario2").addEventListener("submit", function (event) {
+            //  event.preventDefault();  esto evita el envio del formulario
+            var nombreprofe = document.getElementById("nombreprofe").value;
+            var especialidad = document.getElementById("especialidad").value;
+            var email = document.getElementById("email").value;
+
+
+            var dataprofesor = {
+                nombre: nombreprofe,
+                especialidad: especialidad,
+                email: email,
+            }
+            console.log(dataprofesor)
+            //realizamos la llamada a la api
+
+            fetch("http://localhost:3000/profesores", {   // es una promesa
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dataprofesor) //de donde traemos los datos
+            }) //permite hacer peticiones a cualquier api
+                .then(response => response.json())
+                .then(data => {
+                    //manejamos la respuesta de la api
+                    console.log(data);
+                })
+                .catch(error => {
+                    //manejamos el error
+                    console.error("error: ", error);
+                })
+        })
+
+    //le decimos que id va a ejecutar y que preste atencion a un evento
+    </script>
+   
+
+
+   <!-- Comienza lo de cursos-->
+
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="container">
+                    <form id="miformulario3">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombrecurso">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container" id="tablita3">
+                    <h1> Tabla de Cursos</h1>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-cursoss">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
             $.get("http://localhost:3000/cursos", (resp) => {
@@ -190,29 +267,43 @@
             })
         })
     </script>
+    <script> // para enviar nuevo profesor
+        document.getElementById("miformulario3").addEventListener("submit", function (event) {
+            //  event.preventDefault();  esto evita el envio del formulario
+            var nombrecurso = document.getElementById("nombrecurso").value;
+            var descripcion = document.getElementById("descripcion").value;
 
-    <script>
-        $(document).ready(function () {
-            $.get("http://localhost:3000/estudiantes", (resp) => {
-                const { success, data } = resp;
-                if (success) {
-                    data.forEach(estudiantes => {
-                        $("#tabla-estudiantess").append(
-                            "<tr>" +
-                            "<td>" + estudiantes.id + "</td>" +
-                            "<td>" + estudiantes.nombre + "</td>" +
-                            "<td>" + estudiantes.edad + "</td>" +
-                            "<td>" + estudiantes.grado + "</td>" +
-                            "</tr>"
-                        )
-                    })
-                }
-            })
+            var datacurso = {
+                nombre: nombrecurso,
+                descripcion: descripcion,
+            }
+            console.log(datacurso)
+            //realizamos la llamada a la api
+
+            fetch("http://localhost:3000/cursos", {   // es una promesa
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datacurso) //de donde traemos los datos
+            }) //permite hacer peticiones a cualquier api
+                .then(response => response.json())
+                .then(data => {
+                    //manejamos la respuesta de la api
+                    console.log(data);
+                })
+                .catch(error => {
+                    //manejamos el error
+                    console.error("error: ", error);
+                })
         })
+
+    //le decimos que id va a ejecutar y que preste atencion a un evento
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    
 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

@@ -1,13 +1,23 @@
 #tablita1{
-    margin-top:70px;
-    margin-right: -100px !important;
+    margin-top:80px !important;
+    margin-right: -150px !important;
+    width:800px;
 }
-#tablita{
-  margin-top:150px;
+#tablita2{
+  margin-top:80px;
+  margin-right: -150px !important;
+  width: 800px;
 }
+#tablita3{
+  margin-top:80px;
+  margin-right: -150px !important;
+  width: 800px;
+}
+
 th{
     color:white !important;
     text-align: center;
+    font-weight: 900;
 }
 tbody{
   color:white !important;
@@ -15,24 +25,25 @@ tbody{
 }
 body{
     background-color: black;
-}
-img{
-    width:620px;
-    height: 670px;
-    margin-left:10px;   
+    font-weight: 700;
 }
 h1{
     color:white;
     text-align: center;
+    font-weight: 900;
 }
 form{
   color: white;
   text-align: center;
-  margin-top: 100px !important;
+  margin-top:100px !important;
   margin-bottom: 50px !important;
-  margin-left:-150px !important; 
+  margin-left:-180px !important; 
 }
 button{
-  background-color: rgb(245, 120, 120) !important;
+  background-color: rgb(201, 164, 246) !important;
   width: 100%;
+  color:black !important;
+  font-weight: 800 !important;
+
+  border: 5px solid #932fd6 !important;
 }
